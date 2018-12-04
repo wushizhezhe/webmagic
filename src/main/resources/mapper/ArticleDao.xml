@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.webmagic.dao.ArticleDao">
+
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.webmagic.entity.Article">
+        <result column="id" property="id"/>
+        <result column="wechat_id" property="wechatId"/>
+        <result column="original_id" property="originalId"/>
+        <result column="play_url" property="playUrl"/>
+        <result column="author" property="author"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="source_url" property="sourceUrl"/>
+        <result column="cover" property="cover"/>
+        <result column="content_url" property="contentUrl"/>
+        <result column="publish_time" property="publishTime"/>
+        <result column="digest" property="digest"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        id,
+        wechat_id,
+        original_id,
+        play_url,
+        author,
+        title,
+        content,
+        source_url,
+        cover,
+        content_url,
+        publish_time,
+        digest
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert">
+        INSERT INTO article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null">id,</if>
+            <if test="pojo.wechatId != null">wechat_id,</if>
+            <if test="pojo.originalId != null">original_id,</if>
+            <if test="pojo.playUrl != null">play_url,</if>
+            <if test="pojo.author != null">author,</if>
+            <if test="pojo.title != null">title,</if>
+            <if test="pojo.content != null">content,</if>
+            <if test="pojo.sourceUrl != null">source_url,</if>
+            <if test="pojo.cover != null">cover,</if>
+            <if test="pojo.contentUrl != null">content_url,</if>
+            <if test="pojo.publishTime != null">publish_time,</if>
+            <if test="pojo.digest != null">digest,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null">#{pojo.id},</if>
+            <if test="pojo.wechatId != null">#{pojo.wechatId},</if>
+            <if test="pojo.originalId != null">#{pojo.originalId},</if>
+            <if test="pojo.playUrl != null">#{pojo.playUrl},</if>
+            <if test="pojo.author != null">#{pojo.author},</if>
+            <if test="pojo.title != null">#{pojo.title},</if>
+            <if test="pojo.content != null">#{pojo.content},</if>
+            <if test="pojo.sourceUrl != null">#{pojo.sourceUrl},</if>
+            <if test="pojo.cover != null">#{pojo.cover},</if>
+            <if test="pojo.contentUrl != null">#{pojo.contentUrl},</if>
+            <if test="pojo.publishTime != null">#{pojo.publishTime},</if>
+            <if test="pojo.digest != null">#{pojo.digest},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO article(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.wechatId},
+            #{pojo.originalId},
+            #{pojo.playUrl},
+            #{pojo.author},
+            #{pojo.title},
+            #{pojo.content},
+            #{pojo.sourceUrl},
+            #{pojo.cover},
+            #{pojo.contentUrl},
+            #{pojo.publishTime},
+            #{pojo.digest}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE article
+        <set>
+            <if test="pojo.id != null">id = #{pojo.id},</if>
+            <if test="pojo.wechatId != null">wechat_id = #{pojo.wechatId},</if>
+            <if test="pojo.originalId != null">original_id = #{pojo.originalId},</if>
+            <if test="pojo.playUrl != null">play_url = #{pojo.playUrl},</if>
+            <if test="pojo.author != null">author = #{pojo.author},</if>
+            <if test="pojo.title != null">title = #{pojo.title},</if>
+            <if test="pojo.content != null">content = #{pojo.content},</if>
+            <if test="pojo.sourceUrl != null">source_url = #{pojo.sourceUrl},</if>
+            <if test="pojo.cover != null">cover = #{pojo.cover},</if>
+            <if test="pojo.contentUrl != null">content_url = #{pojo.contentUrl},</if>
+            <if test="pojo.publishTime != null">publish_time = #{pojo.publishTime},</if>
+            <if test="pojo.digest != null">digest = #{pojo.digest}</if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+
+    <!--auto generated Code-->
+    <select id="select" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM article
+        <where>
+            <if test="pojo.id != null">AND id = #{pojo.id}</if>
+            <if test="pojo.wechatId != null">AND wechat_id = #{pojo.wechatId}</if>
+            <if test="pojo.originalId != null">AND original_id = #{pojo.originalId}</if>
+            <if test="pojo.playUrl != null">AND play_url = #{pojo.playUrl}</if>
+            <if test="pojo.author != null">AND author = #{pojo.author}</if>
+            <if test="pojo.title != null">AND title = #{pojo.title}</if>
+            <if test="pojo.content != null">AND content = #{pojo.content}</if>
+            <if test="pojo.sourceUrl != null">AND source_url = #{pojo.sourceUrl}</if>
+            <if test="pojo.cover != null">AND cover = #{pojo.cover}</if>
+            <if test="pojo.contentUrl != null">AND content_url = #{pojo.contentUrl}</if>
+            <if test="pojo.publishTime != null">AND publish_time = #{pojo.publishTime}</if>
+            <if test="pojo.digest != null">AND digest = #{pojo.digest}</if>
+        </where>
+        LIMIT 1000
+    </select>
+
+    <select id="selectByOriginalId" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM article
+        where
+        original_id = #{originalId}
+    </select>
+</mapper>

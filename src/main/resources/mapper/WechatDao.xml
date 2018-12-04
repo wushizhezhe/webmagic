@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.webmagic.dao.WechatDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.example.webmagic.entity.Wechat">
+        <result column="id" property="id"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="info" property="info"/>
+        <result column="account" property="account"/>
+        <result column="source_url" property="sourceUrl"/>
+    </resultMap>
+
+<!--auto generated Code-->
+    <sql id="all_column">
+        id,
+        nick_name,
+        info,
+        account,
+        source_url
+    </sql>
+
+<!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO wechat
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> id, </if>
+            <if test="pojo.nickName != null"> nick_name, </if>
+            <if test="pojo.info != null"> info, </if>
+            <if test="pojo.account != null"> account, </if>
+            <if test="pojo.sourceUrl != null"> source_url, </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> #{pojo.id}, </if>
+            <if test="pojo.nickName != null"> #{pojo.nickName}, </if>
+            <if test="pojo.info != null"> #{pojo.info}, </if>
+            <if test="pojo.account != null"> #{pojo.account}, </if>
+            <if test="pojo.sourceUrl != null"> #{pojo.sourceUrl}, </if>
+        </trim>
+    </insert>
+
+<!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO wechat(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.nickName},
+            #{pojo.info},
+            #{pojo.account},
+            #{pojo.sourceUrl}
+            )
+        </foreach>
+    </insert>
+
+<!--auto generated Code-->
+    <update id="update">
+        UPDATE wechat
+        <set>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.nickName != null"> nick_name = #{pojo.nickName}, </if>
+            <if test="pojo.info != null"> info = #{pojo.info}, </if>
+            <if test="pojo.account != null"> account = #{pojo.account}, </if>
+            <if test="pojo.sourceUrl != null"> source_url = #{pojo.sourceUrl} </if>
+        </set>
+         WHERE id = #{pojo.id}
+    </update>
+
+<!--auto generated Code-->
+    <select id="select" resultMap="AllColumnMap">
+        SELECT <include refid="all_column"/>
+        FROM wechat
+        <where>
+            <if test="pojo.id != null"> AND id = #{pojo.id} </if>
+            <if test="pojo.nickName != null"> AND nick_name = #{pojo.nickName} </if>
+            <if test="pojo.info != null"> AND info = #{pojo.info} </if>
+            <if test="pojo.account != null"> AND account = #{pojo.account} </if>
+            <if test="pojo.sourceUrl != null"> AND source_url = #{pojo.sourceUrl} </if>
+        </where>
+        LIMIT 1000 
+    </select>
+</mapper>
