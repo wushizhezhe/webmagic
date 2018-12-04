@@ -21,26 +21,31 @@ public class SougouPageProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
-        if(page.getUrl().toString().contains("https://weixin.sogou.com/weixin?type=1")){
+        String url = page.getUrl().toString();
+        if(url.contains("https://weixin.sogou.com/weixin?type=1")){
 
             List<String> all = page.getHtml().links().regex("http://mp\\.weixin\\.qq\\.com/profile\\?src=3.*").all();
 
             //System.out.println("size:" + all.size());
            // Set<String> set = new HashSet<>(all);
             //set.forEach(System.out::println);
+            page.putField("spiderType", "wechat");
             page.addTargetRequest(all.get(0));
         }
 
-        if (page.getUrl().toString().contains("http://mp.weixin.qq.com/profile?src=3")){
+        if (url.contains("http://mp.weixin.qq.com/profile?src=3")){
+            page.putField("spiderType", "wechatInfo");
             Html html = page.getHtml();
             System.out.println(html.toString());
             Selectable nickName = page.getHtml().$("strong.profile_nickname","text");
-            System.out.println("nickName:" + nickName);
+           // System.out.println("nickName:" + nickName);
            // page.putField("nick",nickName);
             Wechat wechat = new Wechat();
-            wechat.setNickName(nickName.toString());
-            String info = page.getHtml().$(".profile_desc .profile_desc_value", "text").toString();
-            String account = page.getHtml().$(".profile_account", "txt").toString();
+            wechat.setNickName(nickName.toString().trim());
+            wechat.setSourceUrl(url);
+            String info = page.getHtml().$(".profile_desc .profile_desc_value", "text").toString().trim();
+            String account = page.getHtml().$(".profile_account", "text").toString();
+            account = account.replace("微信号:", "").trim();
             wechat.setAccount(account);
             wechat.setInfo(info);
             page.putField("wechat",wechat);

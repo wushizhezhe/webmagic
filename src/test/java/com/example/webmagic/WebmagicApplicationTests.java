@@ -1,6 +1,6 @@
 package com.example.webmagic;
 
-import com.example.webmagic.pipeline.WeixinPipeline;
+import com.example.webmagic.pipeline.SougouWeixinPipeline;
 import com.example.webmagic.processor.SougouPageProcessor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +19,7 @@ public class WebmagicApplicationTests {
         Spider.create(new SougouPageProcessor())
                 .addUrl("https://weixin.sogou.com/weixin?type=1&s_from=input&query=码农翻身&ie=utf8&_sug_=n&_sug_type_=")
                 .addPipeline(new ConsolePipeline())
-                .addPipeline(new WeixinPipeline())
+                .addPipeline(new SougouWeixinPipeline())
                 .thread(5).run();
     }
 

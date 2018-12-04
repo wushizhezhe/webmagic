@@ -14,25 +14,7 @@ public class Wechat {
 
     private String account;
 
-    private AppMsgExtInfo appMsgExtInfo;
-
-    private CommMsgInfo commMsgInfo;
-
-    public void setAppMsgExtInfo(AppMsgExtInfo appMsgExtInfo) {
-        this.appMsgExtInfo = appMsgExtInfo;
-    }
-
-    public AppMsgExtInfo getAppMsgExtInfo() {
-        return appMsgExtInfo;
-    }
-
-    public void setCommMsgInfo(CommMsgInfo commMsgInfo) {
-        this.commMsgInfo = commMsgInfo;
-    }
-
-    public CommMsgInfo getCommMsgInfo() {
-        return commMsgInfo;
-    }
+    private String sourceUrl;
 
     public Integer getId() {
         return id;
@@ -64,6 +46,15 @@ public class Wechat {
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
+
+    public void setSourceUrl(String sourceUrl) {
+        this.sourceUrl = sourceUrl;
     }
 
     @Override
