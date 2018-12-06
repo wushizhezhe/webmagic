@@ -3,6 +3,8 @@ package com.example.webmagic.processor;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -18,6 +20,8 @@ import java.util.Map;
  * @Created 2018/12/3 14:48.
  */
 public class WechatProcessor implements PageProcessor {
+
+    private Logger logger = LoggerFactory.getLogger(WechatProcessor.class);
     private static final String UA_PC = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36";
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000).setUserAgent(UA_PC);
@@ -29,7 +33,10 @@ public class WechatProcessor implements PageProcessor {
 
         String url = page.getUrl().toString();
         String html = page.getHtml().toString();
-        if (html.contains("没权")){
+        if (html.contains("无权")){
+            logger.info("{}",html);
+            page.setSkip(true);
+            page.putField("","");
             return;
         }
         System.out.println(html);

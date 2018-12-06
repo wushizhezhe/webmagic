@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://theme.typecho.ptbird.cn/bootstrap-blog/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <!-- <meta name="renderer" content="webkit">-->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>BootstrapBlog 主题</title>
+
+    <!-- 使用url函数转换相关路径 -->
+    <!-- 判断是否使用 CDN 加载基础资源-->
+    <!-- 使用 CDN-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/prism.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.goup.min.js"></script>
+    <script src="/js/prism.js"></script>
+    <script src="/js/app.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- 通过自有函数输出HTML头部信息 -->
+    <meta name="description" content="基于Bootstrap4的响应式typecho博客主题">
+    <meta name="keywords" content="typecho主题,typecho,php,blog">
+    <meta name="generator" content="Typecho 1.1/17.10.30">
+    <meta name="template" content="postbird">
+    <link rel="pingback" href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/action/xmlrpc">
+    <link rel="EditURI" type="application/rsd+xml" title="RSD"
+          href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/action/xmlrpc?rsd">
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml"
+          href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/action/xmlrpc?wlw">
+    <link rel="alternate" type="application/rss+xml" title="BootstrapBlog 主题 » RSS 2.0"
+          href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/feed/">
+    <link rel="alternate" type="application/rdf+xml" title="BootstrapBlog 主题 » RSS 1.0"
+          href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/feed/rss/">
+    <link rel="alternate" type="application/atom+xml" title="BootstrapBlog 主题 » ATOM 1.0"
+          href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/feed/atom/">
+
+    <!-- 用户自定义 stylesheet -->
+    <style>
+    </style>
+    <style type="text/css" abt="234"></style>
+    <script>//remove 17173 video ad
+    doAdblock();
+
+    function doAdblock() {
+        (function () {
+            function A() {
+            }
+
+            A.prototype = {
+                rules: {
+                    '17173_in': {
+                        'find': /http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFile(Customer)?\.swf/,
+                        'replace': "http://swf.adtchrome.com/17173_in_20150522.swf"
+                    },
+                    '17173_out': {
+                        'find': /http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFileFirstpage\.swf/,
+                        'replace': "http://swf.adtchrome.com/17173_out_20150522.swf"
+                    },
+                    '17173_live': {
+                        'find': /http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream(_firstpage)?\.swf/,
+                        'replace': "http://swf.adtchrome.com/17173_stream_20150522.swf"
+                    },
+                    '17173_live_out': {
+                        'find': /http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream_(custom)?Out\.swf/,
+                        'replace': "http://swf.adtchrome.com/17173.out.Live.swf"
+                    }
+                },
+                _done: null,
+                get done() {
+                    if (!this._done) {
+                        this._done = new Array();
+                    }
+                    return this._done;
+                },
+                addAnimations: function () {
+                    var style = document.createElement('style');
+                    style.type = 'text/css';
+                    style.innerHTML = 'object,embed{\
+                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;\
+                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;\
+                -o-animation-duration:.001s;-o-animation-name:playerInserted;\
+                animation-duration:.001s;animation-name:playerInserted;}\
+                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}';
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                },
+                animationsHandler: function (e) {
+                    if (e.animationName === 'playerInserted') {
+                        this.replace(e.target);
+                    }
+                },
+                replace: function (elem) {
+                    if (this.done.indexOf(elem) != -1) return;
+                    this.done.push(elem);
+                    var player = elem.data || elem.src;
+                    if (!player) return;
+                    var i, find, replace = false;
+                    for (i in this.rules) {
+                        find = this.rules[i]['find'];
+                        if (find.test(player)) {
+                            replace = this.rules[i]['replace'];
+                            if ('function' === typeof this.rules[i]['preHandle']) {
+                                this.rules[i]['preHandle'].bind(this, elem, find, replace, player)();
+                            } else {
+                                this.reallyReplace.bind(this, elem, find, replace)();
+                            }
+                            break;
+                        }
+                    }
+                },
+                reallyReplace: function (elem, find, replace) {
+                    elem.data && (elem.data = elem.data.replace(find, replace)) || elem.src && ((elem.src = elem.src.replace(find, replace)) && (elem.style.display = 'block'));
+                    var b = elem.querySelector("param[name='movie']");
+                    this.reloadPlugin(elem);
+                },
+                reloadPlugin: function (elem) {
+                    var nextSibling = elem.nextSibling;
+                    var parentNode = elem.parentNode;
+                    parentNode.removeChild(elem);
+                    var newElem = elem.cloneNode(true);
+                    this.done.push(newElem);
+                    if (nextSibling) {
+                        parentNode.insertBefore(newElem, nextSibling);
+                    } else {
+                        parentNode.appendChild(newElem);
+                    }
+                },
+                init: function () {
+                    var handler = this.animationsHandler.bind(this);
+                    document.body.addEventListener('webkitAnimationStart', handler, false);
+                    document.body.addEventListener('msAnimationStart', handler, false);
+                    document.body.addEventListener('oAnimationStart', handler, false);
+                    document.body.addEventListener('animationstart', handler, false);
+                    this.addAnimations();
+                }
+            };
+            new A().init();
+        })();
+    }
+
+    //remove baidu search ad
+    if (document.URL.indexOf('www.baidu.com') >= 0) {
+        if (document && document.getElementsByTagName && document.getElementById && document.body) {
+            var aa = function () {
+                var all = document.body.querySelectorAll("#content_left div,#content_left table");
+                for (var i = 0; i < all.length; i++) {
+                    if (/display:\s?(table|block)\s!important/.test(all[i].getAttribute("style"))) {
+                        all[i].style.display = "none";
+                        all[i].style.visibility = 'hidden';
+                    }
+                }
+                all = document.body.querySelectorAll('.result.c-container[id="1"]');
+                //if(all.length == 1) return;
+                for (var i = 0; i < all.length; i++) {
+                    if (all[i].innerHTML && all[i].innerHTML.indexOf('广告') > -1) {
+                        all[i].style.display = "none";
+                        all[i].style.visibility = 'hidden';
+                    }
+                }
+            }
+            aa();
+            document.getElementById('wrapper_wrapper').addEventListener('DOMSubtreeModified', aa)
+        }
+        ;
+    }
+    //remove sohu video ad
+    if (document.URL.indexOf("tv.sohu.com") >= 0) {
+        if (document.cookie.indexOf("fee_status=true") == -1) {
+            document.cookie = 'fee_status=true'
+        }
+        ;
+    }
+    //remove 56.com video ad
+    if (document.URL.indexOf("56.com") >= 0) {
+        if (document.cookie.indexOf("fee_status=true") == -1) {
+            document.cookie = 'fee_status=true'
+        }
+        ;
+    }
+    //fore iqiyi enable html5 player function
+    if (document.URL.indexOf("iqiyi.com") >= 0) {
+        if (document.cookie.indexOf("player_forcedType=h5_VOD") == -1) {
+            document.cookie = 'player_forcedType=h5_VOD'
+            if (localStorage.reloadTime && Date.now() - parseInt(localStorage.reloadTime) < 60000) {
+                console.log('no reload')
+            } else {
+                location.reload()
+                localStorage.reloadTime = Date.now();
+            }
+        }
+    }
+    </script>
+    <style type="text/css">object, embed {
+        -webkit-animation-duration: .001s;
+        -webkit-animation-name: playerInserted;
+        -ms-animation-duration: .001s;
+        -ms-animation-name: playerInserted;
+        -o-animation-duration: .001s;
+        -o-animation-name: playerInserted;
+        animation-duration: .001s;
+        animation-name: playerInserted;
+    }
+
+    @-webkit-keyframes playerInserted {
+        from {
+            opacity: 0.99;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @-ms-keyframes playerInserted {
+        from {
+            opacity: 0.99;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @-o-keyframes playerInserted {
+        from {
+            opacity: 0.99;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes playerInserted {
+        from {
+            opacity: 0.99;
+        }
+        to {
+            opacity: 1;
+        }
+    }</style>
+</head>
+<body>
+<![endif]-->
+
+<header id="header" class="clearfix">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+        <div class="container">
+            <a class="navbar-brand" href="http://theme.typecho.ptbird.cn/bootstrap-blog/"
+               title="基于Bootstrap4的响应式typecho博客主题">微信</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <!--<li class="nav-item ">
+                        <a class="nav-link" href="http://theme.typecho.ptbird.cn/bootstrap-blog/">首页 <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/14.html"
+                           title="文章分类"><span>文章分类</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/15.html"
+                           title="文章归档"><span>文章归档</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/17.html"
+                           title="标签"><span>标签</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/18.html"
+                           title="友链"><span>友链</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/start-page.html"
+                           title="关于"><span>关于</span></a>
+                    </li>-->
+                </ul>
+                <div class="navbar-text">
+                    <form method="post" action="http://theme.typecho.ptbird.cn/bootstrap-blog/"
+                          class="search-form form-inline">
+                        <div class="form-group">
+                            <input type="search" name="s" class="form-control form-control-sm">
+                            <button class="btn btn-info btn-sm">搜索</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+</header><!-- end #header -->
+<div id="body">
+    <div class="container main-wrapper">
+        <div class="row">
+
+
+            <div class="col-md-8 col-xs-12 " id="main" role="main">
+                <article class="post-wrapper" itemscope="" itemtype="http://schema.org/BlogPosting" th:each="article:${articles}">
+                    <div class="row" >
+                        <div class="col-md-12">
+                            <h3><a class="title-link" itemprop="url" th:text="${article.title}"
+                                   th:href="${article.contentUrl}">
+                                <span style="color:red"> </span></a></h3>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="no-thumb-image">
+                              <!--  <span>暂无缩略图</span>-->
+                                <img th:src="${article.cover}" class="post-thumb-image img-thumbnail">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+
+                            <!--                   <hr>-->
+                            <div class="post-content" itemprop="articleBody" th:text="${article.digest}">
+                            </div>
+                        </div>
+                        <div class="col-md-12 post-meta">
+                            <ul class="">
+                                <li>时间：
+                                    <!--<time datetime="2018-12-03T23:35:00+08:00" itemprop="datePublished">2018-12-03
+                                    </time>-->
+                                    <span th:text="${#dates.format(article.publishTime,'yyyy-MM-dd')}"></span>
+                                </li>
+                                <li itemprop="author" itemscope="" itemtype="http://schema.org/Person">作者： <a
+                                        itemprop="name" th:text="${article.author}"
+                                        href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/author/1/"
+                                        rel="author"></a></li>
+                                <li>微信号：<a th:text="${article.nickName}"></a>
+                                    <!-- <a
+                                        href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/category/default/">默认分类</a>-->
+                                </li>
+                                <li itemprop="interactionCount"><a itemprop="discussionUrl" th:onclick="'javascript:deleteArticle('+${article.id}+')'">
+                                    隐藏</a></li>
+                                <li class="float-right">
+                                    <a th:href="${article.contentUrl}"
+                                       class="float-right">阅读全文</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+
+                </article>
+                <nav aria-label="Page navigation ">
+                    <ul class="pagination">
+                        <li class="prev" th:if="${pageNum > 1}"><a th:href="@{/article/{pageNum}(pageNum=${pageNum - 1})}">«</a>
+                        <li class="active"><a th:href="@{/article/{pageNum}(pageNum=${pageNum})}" th:text="${pageNum}"></a></li>
+                        <li class="next" th:if="${pages > pageNum}"><a th:href="@{/article/{pageNum}(pageNum=${pageNum + 1})}">»</a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div><!-- end #main-->
+
+            <div class="col-md-4 kit-hidden-tb" id="secondary" role="complementary">
+
+
+                <!-- 边栏显示最近文章，默认注释掉 -->
+
+
+                <!-- 边栏显示最近回复，默认开启 -->
+<!--                <section class="widget">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info"><span>最近回复</span></li>
+                        <li class="list-group-item comment-item"><a
+                                href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/archives/21/comment-page-1#comment-85">admin</a>：
+                            http://forum.typecho.org/search....
+                        </li>
+                        <li class="list-group-item comment-item"><a
+                                href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/archives/21/comment-page-1#comment-84">admin</a>：
+                            查看 prism 的文档
+                        </li>
+                        <li class="list-group-item comment-item"><a
+                                href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/archives/21/comment-page-1#comment-83">admin</a>：
+                            在 .navbar-nav 添加如下的 css 就行了.nav...
+                        </li>
+                    </ul>
+                </section>-->
+
+
+                <!-- 边栏显示文章分类 默认开启-->
+
+                <!-- 边栏显示归档，默认注释掉 -->
+
+
+                <!--    边栏显示其他操作，默认开启-->
+<!--                <section class="widget">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info"><span>其他</span></li>
+                        <li class="list-group-item"><a
+                                href="http://theme.typecho.ptbird.cn/bootstrap-blog/admin/login.php">登录</a></li>
+                        <li class="list-group-item"><a
+                                href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/feed/">文章 RSS</a></li>
+                        <li class="list-group-item"><a
+                                href="http://theme.typecho.ptbird.cn/bootstrap-blog/index.php/feed/comments/">评论 RSS</a>
+                        </li>
+                    </ul>
+                </section>-->
+
+
+                <!-- 边栏显示友情链接，默认注释掉 -->
+                <!--    <section class="widget">-->
+                <!--        <ul class="list-group">-->
+                <!--            <li class="list-group-item list-group-item-info"><span>--><!--</span></li>-->
+                <!--            <li class="list-group-item"><a target="_blank" href="" title="">友情链接名称</a></li>-->
+                <!--        </ul>-->
+                <!--    </section>-->
+
+            </div><!-- end #sidebar -->
+            <a class="to-top"
+               style="z-index: 1200; cursor: pointer; position: fixed; right: 15px; bottom: 30px; display: none;">
+                <img src="/svg/top.svg" alt="返回顶部" title="返回顶部">
+            </a>
+           <!-- <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <footer id="footer" role="contentinfo">
+                            © 2018 <a href="http://theme.typecho.ptbird.cn/bootstrap-blog/">BootstrapBlog 主题</a>.
+                            <a target="_blank" href="http://www.miitbeian.gov.cn/">鲁ICP备16034533号-1</a> .
+                            由 <a href="http://www.typecho.org/" target="_blank">Typecho</a> 强力驱动.
+                            Theme by <a href="http://www.ptbird.cn/" target="_blank">Postbird</a>.
+                        </footer>&lt;!&ndash; end #footer &ndash;&gt;
+                    </div>
+                </div>
+            </div>-->
+
+
+            <!-- 用户自定义脚本内容 -->
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function deleteArticle(_id) {
+        $.ajax({
+            url:"/article/hide/" + _id,
+            type:"get",
+            success:function(result){
+                console.log(result);
+                alert(result);
+            }
+        });
+    }
+</script>

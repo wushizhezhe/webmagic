@@ -140,4 +140,44 @@
         where
         original_id = #{originalId}
     </select>
+
+    <select id="selectPage" resultType="com.example.webmagic.entity.VO.ArticleVO">
+        SELECT
+        a.id,
+        a.wechat_id,
+        a.original_id,
+        a.play_url,
+        a.author,
+        a.title,
+        a.content,
+        a.source_url,
+        a.cover,
+        a.content_url,
+        a.publish_time,
+        a.digest,
+        w.nick_name,
+        w.account
+        FROM article a, wechat w
+        where is_delete = 0
+        and a.wechat_id = w.id
+        <if test="sort != null ">
+            order by
+            <foreach collection="sort" item="item">
+                ${item}
+            </foreach>
+        </if>
+        LIMIT #{onPage}, #{toPage}
+    </select>
+    <select id="selectPageTotal" resultType="java.lang.Integer">
+        SELECT
+        count(0)
+        FROM article
+        where is_delete = 0
+    </select>
+    <update id="delete">
+        UPDATE article
+        set
+           is_delete = 1
+        WHERE id = #{id}
+    </update>
 </mapper>
