@@ -57,6 +57,13 @@ public class Wechat {
         this.sourceUrl = sourceUrl;
     }
 
+    public Wechat(String account) {
+        this.account = account;
+    }
+
+    public Wechat() {
+    }
+
     @Override
     public String toString() {
         return "Wechat{" +

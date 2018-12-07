@@ -9,6 +9,7 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,8 +26,14 @@ public class SougouWeixinPipeline implements Pipeline {
         String spiderType = (String) all.get("spiderType");
         if (spiderType.equals("wechatInfo")){
             Wechat wechat = (Wechat) all.get("wechat");
+            List<Wechat> select = getWechatService().select(new Wechat(wechat.getAccount()));
+            if (!select.isEmpty()){
+                wechat.setId(select.get(0).getId());
+                getWechatService().update(wechat);
+            }else {
+                getWechatService().insert(wechat);
+            }
             JSONArray list = (JSONArray) all.get("list");
-            getWechatService().insert(wechat);
             getArticleService().saveByArray(list,wechat.getId());
         }
     }
